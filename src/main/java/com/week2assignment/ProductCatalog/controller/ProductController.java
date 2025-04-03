@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
@@ -31,5 +32,11 @@ public class ProductController {
         return productService.addProduct(dto);
     }
 
+    @DeleteMapping("/deleteProduct/{productId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable(value = "productId")Long productId){
+
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok("Product deleted successfully");
+    }
 }
 

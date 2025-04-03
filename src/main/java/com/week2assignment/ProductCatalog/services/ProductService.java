@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 
 @Service
 public class ProductService {
@@ -32,5 +35,13 @@ public class ProductService {
         Product product = productRepository.save(ProductConvertor.toEntity(dto, category));
         return ProductConvertor.toDTO(product);
     }
+
+    public void deleteProduct(Long productId){
+
+        Product product = productRepository.findById(productId).orElseThrow(()->new RuntimeException("Product not found with given id"));
+        productRepository.delete(product);
+
+    }
+
 }
 
